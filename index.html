@@ -219,6 +219,30 @@
       image-rendering: -webkit-optimize-contrast;
     }
 
+    /* ========================================================================= */
+    /* EFECTOS PARALLAX ADICIONALES: LÍNEA DE PROGRESO, SELLO FLOTANTE Y TIMELINE */
+    /* ========================================================================= */
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spinSlow 50s linear infinite;
+    }
+    .card-process-step {
+      background: rgba(11, 23, 38, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(180, 154, 99, 0.25);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-process-step:hover {
+      background: rgba(14, 28, 46, 0.92);
+      border-color: rgba(180, 154, 99, 0.65);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(180, 154, 99, 0.3);
+    }
+
     .text-shadow-strong {
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85), 0 4px 20px rgba(0, 0, 0, 0.6);
     }
@@ -302,6 +326,8 @@
         </a>
       </div>
     </div>
+    <!-- Barra de progreso de lectura dorada continua -->
+  <div id="scroll-progress-bar" class="fixed top-[57px] md:top-[69px] left-0 h-[2.5px] bg-gradient-to-r from-gold-dark via-gold to-gold-light w-0 z-50 transition-all duration-75 shadow-[0_0_8px_rgba(180,154,99,0.8)]"></div>
   </header>
 
   <!-- ========================================================================= -->
@@ -364,6 +390,17 @@
     <div class="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-navy-deep/45 to-navy-deep/75 z-10 pointer-events-none"></div>
 
     <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Sello Notarial Flotante Parallax 2.5D (Profundidad Escénica) -->
+      <div id="nosotros-seal-float" class="absolute -right-24 top-20 w-[420px] h-[420px] rounded-full border border-gold/15 flex items-center justify-center pointer-events-none select-none opacity-25 will-change-transform hidden xl:flex z-0">
+        <div class="w-[360px] h-[360px] rounded-full border border-dashed border-gold/25 flex items-center justify-center animate-spin-slow">
+          <div class="w-[280px] h-[280px] rounded-full border border-gold/15 flex flex-col items-center justify-center text-gold/40 font-cinzel">
+            <i data-lucide="shield-check" class="w-16 h-16 text-gold/30 mb-2"></i>
+            <span class="text-[10px] tracking-widest uppercase">NOTARÍA PÚBLICA 95</span>
+            <span class="text-[8px] tracking-widest text-gold/30">SALTILLO · COAHUILA</span>
+          </div>
+        </div>
+      </div>
       
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="inline-block text-gold font-cinzel text-xs tracking-widest uppercase mb-3 text-shadow-strong">
@@ -1047,7 +1084,12 @@
   <!-- ========================================================================= -->
   <!-- SECCIÓN 5: PROCESO DE ATENCIÓN (5 PASOS) -->
   <!-- ========================================================================= -->
-  <section id="proceso" class="relative py-28 sm:py-36 bg-[#0E1C2E] border-t border-b border-gold/20">
+  <section id="proceso" class="relative py-28 sm:py-36 bg-[#0E1C2E] border-t border-b border-gold/20 overflow-hidden">
+    
+    <!-- Tipografía Cinética Gigante en Marca de Agua (Desplazamiento Parallax) -->
+    <div id="proceso-kinetic-text" class="absolute top-10 left-0 whitespace-nowrap text-[110px] sm:text-[150px] font-serif font-black uppercase tracking-widest text-gold/[0.035] pointer-events-none select-none will-change-transform">
+      FE PÚBLICA · RIGOR JURÍDICO · CERTEZA NOTARIAL · SALTILLO · PROTOCOLO OFICIAL · 
+    </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-20">
@@ -1063,9 +1105,15 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+      <!-- Línea conductora dorada que se llena con el scroll -->
+      <div class="hidden md:block relative w-full mb-10 px-4">
+        <div class="h-0.5 bg-white/10 w-full rounded-full"></div>
+        <div id="proceso-timeline-bar" class="h-0.5 bg-gradient-to-r from-gold-dark via-gold to-gold-light w-0 absolute top-0 left-4 rounded-full transition-all duration-150 shadow-[0_0_12px_rgba(180,154,99,0.8)]"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10">
         
-        <div class="card-glass p-6 rounded-sm border border-gold/20 flex flex-col justify-between hover:border-gold/50 transition-all group">
+        <div class="card-process-step p-6 rounded-sm flex flex-col justify-between group">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono font-bold text-gold tracking-widest uppercase">Paso 01</span>
             <div class="w-8 h-8 rounded-full bg-navy-light/60 border border-gold/30 flex items-center justify-center text-gold text-xs font-bold">1</div>
@@ -1078,7 +1126,7 @@
           </div>
         </div>
 
-        <div class="card-glass p-6 rounded-sm border border-gold/20 flex flex-col justify-between hover:border-gold/50 transition-all group">
+        <div class="card-process-step p-6 rounded-sm flex flex-col justify-between group">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono font-bold text-gold tracking-widest uppercase">Paso 02</span>
             <div class="w-8 h-8 rounded-full bg-navy-light/60 border border-gold/30 flex items-center justify-center text-gold text-xs font-bold">2</div>
@@ -1091,7 +1139,7 @@
           </div>
         </div>
 
-        <div class="card-glass p-6 rounded-sm border border-gold/20 flex flex-col justify-between hover:border-gold/50 transition-all group">
+        <div class="card-process-step p-6 rounded-sm flex flex-col justify-between group">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono font-bold text-gold tracking-widest uppercase">Paso 03</span>
             <div class="w-8 h-8 rounded-full bg-navy-light/60 border border-gold/30 flex items-center justify-center text-gold text-xs font-bold">3</div>
@@ -1104,7 +1152,7 @@
           </div>
         </div>
 
-        <div class="card-glass p-6 rounded-sm border border-gold/20 flex flex-col justify-between hover:border-gold/50 transition-all group">
+        <div class="card-process-step p-6 rounded-sm flex flex-col justify-between group">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono font-bold text-gold tracking-widest uppercase">Paso 04</span>
             <div class="w-8 h-8 rounded-full bg-navy-light/60 border border-gold/30 flex items-center justify-center text-gold text-xs font-bold">4</div>
@@ -1117,7 +1165,7 @@
           </div>
         </div>
 
-        <div class="card-glass p-6 rounded-sm border border-gold/20 flex flex-col justify-between hover:border-gold/50 transition-all group">
+        <div class="card-process-step p-6 rounded-sm flex flex-col justify-between group">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-mono font-bold text-gold tracking-widest uppercase">Paso 05</span>
             <div class="w-8 h-8 rounded-full bg-navy-light/60 border border-gold/30 flex items-center justify-center text-gold text-xs font-bold">5</div>
@@ -1768,6 +1816,61 @@
         previewImg.src = MEDIA_BASE + (isMobile ? '44.jpg' : '4.jpg');
       }
     }
+
+    // Control del Parallax Continuo (Barra superior, Marca de agua cinética, Línea del proceso y Sello flotante)
+    function onScrollParallaxEffects() {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      
+      // 1. Barra de progreso dorada en header
+      const progressBar = document.getElementById('scroll-progress-bar');
+      if (progressBar && docHeight > 0) {
+        const pct = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
+        progressBar.style.width = pct + '%';
+      }
+
+      // 2. Tipografía cinética en segundo plano en Proceso (desplazamiento horizontal suave)
+      const kineticText = document.getElementById('proceso-kinetic-text');
+      if (kineticText) {
+        const procesoSec = document.getElementById('proceso');
+        if (procesoSec) {
+          const rect = procesoSec.getBoundingClientRect();
+          if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+            const moveX = (window.innerHeight - rect.top) * 0.22;
+            kineticText.style.transform = `translate3d(${-moveX}px, 0, 0)`;
+          }
+        }
+      }
+
+      // 3. Línea conductora dorada en Proceso (se llena según avanzas dentro de la sección)
+      const timelineBar = document.getElementById('proceso-timeline-bar');
+      if (timelineBar) {
+        const procesoSec = document.getElementById('proceso');
+        if (procesoSec) {
+          const rect = procesoSec.getBoundingClientRect();
+          const totalDistance = procesoSec.offsetHeight;
+          const currentProgress = (window.innerHeight * 0.7 - rect.top) / totalDistance;
+          const clampProgress = Math.min(1, Math.max(0, currentProgress));
+          timelineBar.style.width = (clampProgress * 95) + '%';
+        }
+      }
+
+      // 4. Sello Notarial Flotante en Nosotros (desfase vertical suave a 0.15x)
+      const sealFloat = document.getElementById('nosotros-seal-float');
+      if (sealFloat) {
+        const nosotrosSec = document.getElementById('nosotros');
+        if (nosotrosSec) {
+          const rect = nosotrosSec.getBoundingClientRect();
+          if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+            const moveY = (window.innerHeight - rect.top) * 0.14;
+            sealFloat.style.transform = `translate3d(0, ${moveY}px, 0)`;
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', onScrollParallaxEffects, { passive: true });
+    window.addEventListener('resize', onScrollParallaxEffects);
 
     window.addEventListener('resize', setupFixedParallaxBackgrounds);
     window.addEventListener('orientationchange', () => {
